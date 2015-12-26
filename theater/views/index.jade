@@ -5,4 +5,5 @@ block content
   p Welcome to #{title}
   ul
   each val in files
-    li= val
+    li
+      a(href="/preview/" + val)= val

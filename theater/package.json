@@ -2,6 +2,7 @@
   "name": "theater",
   "version": "1.0.0",
   "description": "Pro Markdown template previewing",
+  "repository": "https://github.com/parisk/theater",
   "scripts": {
     "start": "node ./bin/server"
   },
@@ -14,7 +15,9 @@
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "cli": "0.11.1",
-    "node-env-file": "0.1.8"
+    "node-env-file": "0.1.8",
+    "markdown-it": "5.0.2",
+    "front-matter": "2.0.1"
   },
   "bin": {
     "theater": "./bin/server"
