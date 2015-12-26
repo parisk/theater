@@ -1,4 +1,5 @@
 extends layout
 
 block content
-  div!= template
+  div(id="rendered-template")!= renderedTemplate
+  div(id="markdown-template")!= template

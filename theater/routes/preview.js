@@ -6,10 +6,12 @@ var router = express.Router();
 
 router.get(/^\/(.+)$/, function(req, res, next) {
   var path = process.env.THEATER_DIR + '/' + req.params[0];
-  var renderedTemplate = md.render(fs.readFileSync(path).toString('utf-8'));
+  var template = fs.readFileSync(path).toString('utf-8');
+  var renderedTemplate = md.render(template);
   res.render('preview', {
     title: req.params[0],
-    template: renderedTemplate
+    template: template,
+    renderedTemplate: renderedTemplate
   });
 });
 
