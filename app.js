@@ -27,6 +27,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/preview', preview);
 app.use('/static', express.static(__dirname + '/static'));
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
