@@ -11,7 +11,7 @@ var env = require('node-env-file');
 var fs = require('fs');
 var http = require('http');
 
-if (fs.statSync('.env').isFile()) {
+if (fs.exists('.env') && fs.statSync('.env').isFile()) {
   env('.env');
 }
 
