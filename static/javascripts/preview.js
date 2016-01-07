@@ -69,15 +69,33 @@ function renderTemplate() {
 }
 
 function initializeData() {
-  var search = location.search.substring(1),
-      data = (search === '') ? {} : JSON.parse(
+  var data = {},
+      variables = parsedMarkdownTemplate.filter(function (item) {
+        if (item[0] == 'name') {
+          return true;
+        }
+      }).map(function (item) {
+        return item[1];
+      }),
+      search = location.search.substring(1),
+      searchData = (search === '') ? {} : JSON.parse(
         '{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').
                                  replace(/=/g,'":"') +
         '"}');
 
-    for (var key in data) {
+    variables.forEach(function (variable) {
+      data[variable] = variable;
+    });
+
+    for (var key in searchData) {
+      data[key] = searchData[key];
+    }
+
+
+    for (key in data) {
       var value = data[key],
           row = insertRow();
+
       row.querySelector('.key-cell input').value = key;
       row.querySelector('.value-cell input').value = value;
     }
