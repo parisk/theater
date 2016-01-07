@@ -49,6 +49,8 @@ function insertRow () {
     templateDataBody.removeChild(newRow);
     renderTemplate();
   });
+
+  return newRow;
 }
 
 function collectData() {
@@ -61,11 +63,28 @@ function collectData() {
 }
 
 function renderTemplate() {
-  renderedTemplate.innerHTML = Mustache.render(
-    commonmark.render(markdownTemplate.innerHTML), collectData()
-  );
+  renderedTemplate.innerHTML = commonmark.render(
+    Mustache.render(markdownTemplate.innerHTML, collectData()
+  ));
+}
+
+function initializeData() {
+  var search = location.search.substring(1),
+      data = (search === '') ? {} : JSON.parse(
+        '{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').
+                                 replace(/=/g,'":"') +
+        '"}');
+
+    for (var key in data) {
+      var value = data[key],
+          row = insertRow();
+      row.querySelector('.key-cell input').value = key;
+      row.querySelector('.value-cell input').value = value;
+    }
 }
 
 addRow.addEventListener('click', insertRow);
 
+initializeData();
 insertRow();
+renderTemplate();
